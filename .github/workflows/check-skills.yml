@@ -1,0 +1,26 @@
+name: Check skills
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read public skills
+        run: git clone --depth 1 "https://github.com/${GITHUB_REPOSITORY}.git" repo
+      - name: Check the requested commit
+        run: test "$(git -C repo rev-parse HEAD)" = "$GITHUB_SHA"
+      - name: Compare skills, tools, and guides
+        working-directory: repo
+        env:
+          THIRDS_API_KEY: ${{ secrets.THIRDS_API_KEY }}
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+        run: python3 scripts/check_consistency.py

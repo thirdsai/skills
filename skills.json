@@ -1,0 +1,22 @@
+[
+  {
+    "name": "thirds-brand-kit",
+    "tools": ["list_brand_kits", "create_brand_kit", "update_brand_kit", "set_brand_asset"],
+    "guide": "/docs/design-a-template"
+  },
+  {
+    "name": "thirds-create-template",
+    "tools": ["save_template", "create_template", "edit_template", "publish_template", "get_status"],
+    "guide": "/docs/design-a-template"
+  },
+  {
+    "name": "thirds-reuse-template",
+    "tools": ["list_templates", "render", "get_status"],
+    "guide": "/docs/mcp"
+  },
+  {
+    "name": "thirds-batch-files",
+    "tools": ["list_templates", "create_batch", "retry_batch", "cancel_batch", "get_status"],
+    "guide": "/docs/batch-renders"
+  }
+]
