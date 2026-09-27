@@ -25,19 +25,15 @@ npx skills add https://github.com/thirdsai/skills --skill thirds-brand-kit
 
 Connect your agent to `https://thirds.ai/mcp` with a private thirds.ai API key before you use an MCP skill. Follow the [MCP setup guide](https://thirds.ai/docs/mcp) for your client. Keep the key in your client's secret store.
 
-The [Python example](examples/render_saved_template.py) and [Node example](examples/render_saved_template.mjs) show how to make one PDF with the REST API. They use the same saved templates and credits as MCP. Save your fields as a JSON object, set `THIRDS_API_KEY` in your private environment, then run one:
+The [Node example](examples/render_saved_template.mjs) makes one PDF with the REST API. It uses the same saved templates and credits as MCP. Save your fields as a JSON object, set `THIRDS_API_KEY` in your private environment, then run:
 
 ```sh
-python3 examples/render_saved_template.py \
-  tpl_00000000000000000000000000000000 data.json report.pdf \
-  --idempotency-key report-2026-09
-
 node examples/render_saved_template.mjs \
   tpl_00000000000000000000000000000000 data.json report.pdf \
   report-2026-09
 ```
 
-Replace the sample ID and key. Reuse the same key and arguments if a response is lost. Choose a new key for a new file.
+Replace the sample ID and key. Reuse the same key and data if a response is lost. Choose a new key for a new file.
 
 Skills do not install MCP or spend credits by themselves. The agent connects with your key, shows the cost before paid work, and keeps each signed file link private.
 
