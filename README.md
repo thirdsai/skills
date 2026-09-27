@@ -13,11 +13,12 @@ npx skills add https://github.com/thirdsai/skills
 Or install one skill:
 
 ```sh
-npx skills add https://github.com/thirdsai/skills --skill thirds-brand-kit
+npx skills add https://github.com/thirdsai/skills --skill thirds
 ```
 
 | Skill | Use it when you want to |
 | --- | --- |
+| [thirds](skills/thirds/SKILL.md) | Pick a workflow or make a one-off file from HTML. |
 | [thirds-brand-kit](skills/thirds-brand-kit/SKILL.md) | Set up your logo, colours, fonts, and tone. |
 | [thirds-create-template](skills/thirds-create-template/SKILL.md) | Make an editable design from a gallery template, HTML, words, or an image. |
 | [thirds-reuse-template](skills/thirds-reuse-template/SKILL.md) | Fill a saved design with new details and get a PDF or image. |
