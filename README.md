@@ -1,6 +1,6 @@
 # thirds.ai skills
 
-These skills help an AI agent make branded PDFs and images with [thirds.ai](https://thirds.ai). A skill guides the work. The [thirds.ai MCP server](https://thirds.ai/docs/mcp) provides the tools that do it.
+These nine skills help an AI agent make branded PDFs and images with [thirds.ai](https://thirds.ai). A skill guides the task. The [MCP server](https://thirds.ai/docs/mcp) or [REST API](https://thirds.ai/docs/api) does the work.
 
 ## Install
 
@@ -10,23 +10,29 @@ Install the full library:
 npx skills add https://github.com/thirdsai/skills
 ```
 
-Or install one skill:
+Or install one complete skill:
 
 ```sh
 npx skills add https://github.com/thirdsai/skills --skill thirds
 ```
 
-| Skill | Use it when you want to |
-| --- | --- |
-| [thirds](skills/thirds/SKILL.md) | Pick a workflow or make a one-off file from HTML. |
-| [thirds-brand-kit](skills/thirds-brand-kit/SKILL.md) | Set up your logo, colours, fonts, and tone. |
-| [thirds-create-template](skills/thirds-create-template/SKILL.md) | Make an editable design from a gallery template, HTML, words, or an image. |
-| [thirds-reuse-template](skills/thirds-reuse-template/SKILL.md) | Fill a saved design with new details and get a PDF or image. |
-| [thirds-batch-files](skills/thirds-batch-files/SKILL.md) | Make one file per row from a saved design. |
+Each skill works when installed alone. Pick the task you need:
 
-Connect your agent to `https://thirds.ai/mcp` with a private thirds.ai API key before you use an MCP skill. Follow the [MCP setup guide](https://thirds.ai/docs/mcp) for your client. Keep the key in your client's secret store.
+| Skill | Task | Interface |
+| --- | --- | --- |
+| [thirds](skills/thirds/SKILL.md) | Make a one-off file or choose a file workflow. | MCP, with REST for missing tools |
+| [thirds-brand-kit](skills/thirds-brand-kit/SKILL.md) | Save your logo, colours, fonts, and tone. | MCP |
+| [thirds-create-template](skills/thirds-create-template/SKILL.md) | Make or revise an editable design from a gallery design, HTML, words, or an image. | MCP or REST |
+| [thirds-reuse-template](skills/thirds-reuse-template/SKILL.md) | Fill a saved design with new details. | MCP |
+| [thirds-batch-files](skills/thirds-batch-files/SKILL.md) | Make one file per spreadsheet row. | MCP |
+| [thirds-image-packs](skills/thirds-image-packs/SKILL.md) | Adapt one design to several image sizes. | MCP or REST |
+| [thirds-carousels](skills/thirds-carousels/SKILL.md) | Export chosen slides in order. | MCP or REST |
+| [thirds-ai-image](skills/thirds-ai-image/SKILL.md) | Make a reusable picture asset with AI. | MCP or REST |
+| [thirds-api-workflows](skills/thirds-api-workflows/SKILL.md) | Add safe file creation to an app. | REST |
 
-The [Python](examples/render_saved_template.py) and [Node](examples/render_saved_template.mjs) examples show the REST API call for one PDF. They use the same saved templates and credits as MCP. Set `THIRDS_API_KEY` in your private environment. Replace the template ID, data, and idempotency key in the example you choose.
+Connect your agent to `https://thirds.ai/mcp` with a private thirds.ai API key before using MCP. Follow the [setup guide](https://thirds.ai/docs/mcp) for your client. Keep the key in its secret store. A skill install does not create an authenticated connection.
+
+The [Python](examples/render_saved_template.py) and [Node](examples/render_saved_template.mjs) examples show one REST request for a saved PDF. Set `THIRDS_API_KEY` in your private environment. Replace the sample template ID, data, and idempotency key.
 
 ```sh
 python3 -m pip install requests
@@ -36,9 +42,9 @@ python3 examples/render_saved_template.py
 node examples/render_saved_template.mjs
 ```
 
-Each example prints the render job ID and status. If the file is still running, [check and download the job](https://thirds.ai/docs/retry-and-download). Reuse the same idempotency key and data if a response is lost. Choose a new key for a new file.
+Each example prints the job ID and status. If it is still running, [check and download the job](https://thirds.ai/docs/retry-and-download). Reuse the same key and data after a lost response. Choose a new key for a new file.
 
-Skills do not install MCP or spend credits by themselves. The agent connects with your key, shows the cost before paid work, and keeps each signed file link private.
+The [public API contract](https://thirds.ai/v1/openapi.json) owns current REST fields. Check your connected MCP server's tool catalog before you start. Each skill gives the REST route for a tool your client cannot use.
 
 ## License
 
