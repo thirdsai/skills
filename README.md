@@ -25,19 +25,19 @@ npx skills add https://github.com/thirdsai/skills --skill thirds-brand-kit
 
 Connect your agent to `https://thirds.ai/mcp` with a private thirds.ai API key before you use an MCP skill. Follow the [MCP setup guide](https://thirds.ai/docs/mcp) for your client. Keep the key in your client's secret store.
 
-The [Python example](examples/render_saved_template.py) shows how to make one PDF with the REST API when you work in code. It uses the same saved templates and credits as MCP. Save your fields as a JSON object, set `THIRDS_API_KEY` in your private environment, then run:
+The [Python example](examples/render_saved_template.py) and [Node example](examples/render_saved_template.mjs) show how to make one PDF with the REST API. They use the same saved templates and credits as MCP. Save your fields as a JSON object, set `THIRDS_API_KEY` in your private environment, then run one:
 
 ```sh
 python3 examples/render_saved_template.py \
   tpl_00000000000000000000000000000000 data.json report.pdf \
   --idempotency-key report-2026-09
+
+node examples/render_saved_template.mjs \
+  tpl_00000000000000000000000000000000 data.json report.pdf \
+  report-2026-09
 ```
 
 Replace the sample ID and key. Reuse the same key and arguments if a response is lost. Choose a new key for a new file.
-
-## Keep the skills in sync
-
-The [consistency check](scripts/check_consistency.py) runs when `main` changes and once a week. It reads the live MCP tool schemas and public product guides. Jev flags a likely conflict for review. Exact tool names also have a code check. The check sends only public skills, public guides, and public tool schemas to Jev. To run it yourself, set `THIRDS_API_KEY` and `TYPESAFE_API_KEY` in your private environment and run `python3 scripts/check_consistency.py`. Run `python3 scripts/check_consistency.py --static` for the local checks only.
 
 Skills do not install MCP or spend credits by themselves. The agent connects with your key, shows the cost before paid work, and keeps each signed file link private.
 
