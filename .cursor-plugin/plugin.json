@@ -1,0 +1,19 @@
+{
+  "name": "thirds-ai",
+  "displayName": "thirds.ai",
+  "version": "1.0.0",
+  "description": "Make branded PDFs and images from reusable templates, brand kits, and your data.",
+  "author": { "name": "thirds.ai" },
+  "publisher": "thirds.ai",
+  "homepage": "https://thirds.ai/agents/cursor",
+  "repository": "https://github.com/thirdsai/skills",
+  "license": "MIT",
+  "logo": "assets/logo.png",
+  "category": "productivity",
+  "keywords": ["pdf", "image", "templates", "brand kit", "invoice", "social images", "mcp"],
+  "tags": ["pdf", "images", "design", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": {
+    "thirds": { "url": "https://thirds.ai/mcp" }
+  }
+}
