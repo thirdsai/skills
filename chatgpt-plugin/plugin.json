@@ -1,0 +1,115 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "thirds",
+  "version": "1.0.0",
+  "description": "Make branded PDFs and images from thirds.ai gallery templates and your saved designs, in your own logo, colours, and fonts.",
+  "author": {
+    "name": "thirds.ai",
+    "url": "https://thirds.ai"
+  },
+  "homepage": "https://thirds.ai",
+  "license": "MIT",
+  "keywords": ["pdf", "image", "templates", "brand kit", "invoices", "social posts", "design"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "thirds.ai",
+        "shortDescription": "On-brand PDFs and images",
+        "longDescription": "Make beautiful, on-brand PDFs and images for everything your business sends, right from ChatGPT. Pick a designer-made template from the thirds.ai gallery, or use a design you've saved, and tell ChatGPT your client's name, this week's price, or the invoice total. You get back a finished PDF, PNG, JPEG, or WebP in your own logo, colours, and fonts.\n\nYou can save your logo, colours, fonts, and tone as a brand kit. You can turn your own HTML, a short description, or a picture you upload into a design you can edit and use again. When one file isn't enough, you can make a file for each row of your list, fit an image design to new sizes, or export the carousel slides you pick in the order you want.\n\nIt's built for small business owners, agencies, and marketing teams who send the same kinds of files again and again, like invoices, quotes, client reports, and social posts.\n\nYou need a thirds.ai account. The first time, you sign in on a thirds.ai page and click Allow. A verified free account gets 50 credits each month. Each finished PDF or image uses one credit, and a failed file uses none. A new design from the AI chat uses 50 credits, and each change to it after that uses 25. Previews and browsing the gallery are free.\n\nThere are some things it won't do. It doesn't edit an existing PDF or Word file, make videos, post to social networks, or send email. It can't make AI pictures from this app, so use the thirds.ai editor for that. It only sees the designs, brand kits, and files in your own thirds.ai account.",
+        "developerName": "thirds.ai",
+        "category": "Productivity",
+        "capabilities": [
+          "Make a PDF or image from a thirds.ai gallery template with your own details",
+          "Fill a saved design with a new client, price, or date and get the finished file",
+          "Save your logo, colours, fonts, and tone as a brand kit",
+          "Add a logo or font file to a brand kit",
+          "Turn your own HTML into a design you can use again",
+          "Start or change a design by describing it in the AI chat",
+          "Rebuild a picture you upload as a design you can edit",
+          "Save a new version of a design and keep the earlier one",
+          "Preview a design with your details for free before you spend credits",
+          "Make one file for each row of your list",
+          "Fit one image design to several sizes and get them in one ZIP",
+          "Export the carousel slides you pick, in your order, as one ZIP",
+          "Check a file's progress and get its download link",
+          "Find your saved designs and brand kits by name"
+        ],
+        "websiteURL": "https://thirds.ai",
+        "supportURL": "https://thirds.ai/support",
+        "privacyPolicyURL": "https://thirds.ai/privacy",
+        "termsOfServiceURL": "https://thirds.ai/terms",
+        "defaultPrompt": [
+          "Find an invoice template in the thirds.ai gallery and make a PDF invoice for my client.",
+          "Make this week's sale post as a square image from my saved thirds.ai design.",
+          "Save my logo, colours, and fonts as a thirds.ai brand kit."
+        ],
+        "brandColor": "#0A46FF",
+        "brandColorDark": "#5C8DFF",
+        "composerIcon": "./assets/icon.png",
+        "composerIconDark": "./assets/icon-dark.png",
+        "logo": "./assets/logo.png",
+        "logoDark": "./assets/logo-dark.png",
+        "screenshots": [
+          "./assets/screenshot-invoice.webp",
+          "./assets/screenshot-brand-kit.webp",
+          "./assets/screenshot-export.webp"
+        ]
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List the designs saved in the connected account",
+              "prompt": "Show me the designs I've saved in thirds.ai.",
+              "tools_triggered": ["list_templates"],
+              "expected_behavior": "Calls list_templates and shows each saved design's name, tags, and latest version. An empty list is a valid answer. No credits are spent."
+            },
+            {
+              "description": "Make a PDF invoice from a public gallery template",
+              "prompt": "Find an invoice template in the thirds.ai gallery and make a PDF invoice from Oxley Studio to Tessellate Labs for £2,400 of brand identity work.",
+              "tools_triggered": ["list_gallery_templates", "get_gallery_template", "preview_template", "render", "get_status"],
+              "expected_behavior": "Searches the gallery for an invoice, reads its source and sample data, swaps in the supplied names and amount, and asks for any missing detail. Previews for free, states that the PDF costs one credit, and asks before it calls render with output pdf. Polls get_status until the file succeeds and returns the download link."
+            },
+            {
+              "description": "Make a square social image from a public gallery template",
+              "prompt": "Use a thirds.ai gallery template to make a square PNG post for Harbor Bakery's Saturday sourdough sale, two loaves for £9.",
+              "tools_triggered": ["list_gallery_templates", "get_gallery_template", "preview_template", "render", "get_status"],
+              "expected_behavior": "Picks a gallery design that supports image output, fills in the bakery's text, and previews it for free. Calls render with output png and the template's own width and height after the user approves one credit. Polls get_status and returns the finished image link."
+            },
+            {
+              "description": "Fill a saved design with new values",
+              "prompt": "Make this month's PDF report from my saved Monthly report design for Northgate Studio. Revenue was £18,400 and 42 new clients signed up.",
+              "tools_triggered": ["list_templates", "get_template_version", "render", "get_status"],
+              "expected_behavior": "Finds the saved design by name, reads its full version to learn which values it needs, and asks for any that are missing. States the one-credit cost, then calls render with the template_id and the supplied data. Polls get_status and returns the PDF link. If no design matches, it says so and makes nothing."
+            },
+            {
+              "description": "Create a brand kit",
+              "prompt": "Create a thirds.ai brand kit called Aurelle Skin with the colours #3b1f2b and #c9a24a and a calm, warm tone.",
+              "tools_triggered": ["create_brand_kit"],
+              "expected_behavior": "Calls create_brand_kit with the name, the two colours, and the tone guidance, then returns the new brand kit. It offers to add a logo with set_brand_asset if the user has one. No files are made and no credits are spent."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Editing a Word document is out of scope. The plugin should say it makes new PDFs and images from designs, and call no tools.",
+              "prompt": "Open my contract.docx and fix the typos in section 3."
+            },
+            {
+              "description": "Another person's account is out of reach. The plugin should refuse and explain that it only sees the signed-in account.",
+              "prompt": "Show me the templates and brand kits saved in my competitor's thirds.ai account."
+            },
+            {
+              "description": "Video is out of scope. The plugin should say it makes PDFs and images, not videos, and start no paid work.",
+              "prompt": "Make a 30-second product video for my new sneakers with thirds.ai."
+            }
+          ]
+        },
+        "demo_recording_url": "",
+        "commerce": false
+      },
+      "publication": {
+        "release_notes": "First release. Make branded PDFs and images from gallery templates and your saved designs in ChatGPT."
+      }
+    }
+  }
+}
