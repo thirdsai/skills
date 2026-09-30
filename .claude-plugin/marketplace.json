@@ -1,0 +1,15 @@
+{
+  "name": "thirds-ai",
+  "description": "thirds.ai skills and MCP server for Claude Code.",
+  "owner": {
+    "name": "thirds.ai",
+    "url": "https://thirds.ai"
+  },
+  "plugins": [
+    {
+      "name": "thirds-ai",
+      "source": "./",
+      "description": "Make branded PDFs and images from reusable templates, brand kits, and your data."
+    }
+  ]
+}

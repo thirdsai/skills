@@ -16,6 +16,13 @@ Or install one complete skill:
 npx skills add https://github.com/thirdsai/skills --skill thirds
 ```
 
+In Claude Code, add the plugin. It installs every skill and the thirds.ai MCP server:
+
+```sh
+/plugin marketplace add thirdsai/skills
+/plugin install thirds-ai@thirds-ai
+```
+
 Each skill works when installed alone. Pick the task you need:
 
 | Skill | Task | Interface |
