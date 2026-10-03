@@ -43,17 +43,7 @@ Connect your agent to `https://thirds.ai/mcp` with a private thirds.ai API key b
 
 The skills run in your agent. They send nothing on their own. When your agent uses the thirds.ai MCP server or API, it sends what the task needs to thirds.ai: your template HTML, the data you fill in, brand kit colours, logos, and fonts, and any images you upload. thirds.ai uses them to make your files and keeps them in your account. The [privacy policy](https://thirds.ai/privacy) explains what we keep, for how long, and how to delete it.
 
-The [Python](examples/render_saved_template.py) and [Node](examples/render_saved_template.mjs) examples show one REST request for a saved PDF. Set `THIRDS_API_KEY` in your private environment. Replace the sample template ID, data, and idempotency key.
-
-```sh
-python3 -m pip install requests
-python3 examples/render_saved_template.py
-
-# Or use Node.js 18 or newer:
-node examples/render_saved_template.mjs
-```
-
-Each example prints the job ID and status. If it is still running, [check and download the job](https://thirds.ai/docs/retry-and-download). Reuse the same key and data after a lost response. Choose a new key for a new file.
+For REST calls from your own app, the [quickstart](https://thirds.ai/docs/quickstart) shows the same request in curl, Node, and Python.
 
 The [public API contract](https://thirds.ai/v1/openapi.json) owns current REST fields. Check your connected MCP server's tool catalog before you start. Each skill gives the REST route for a tool your client cannot use.
 
