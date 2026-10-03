@@ -9,7 +9,8 @@
     {
       "name": "thirds-ai",
       "source": "./",
-      "description": "Make branded PDFs and images from reusable templates, brand kits, and your data."
+      "description": "Make branded PDFs and images from reusable templates, brand kits, and your data.",
+      "displayName": "thirds.ai"
     }
   ]
 }
