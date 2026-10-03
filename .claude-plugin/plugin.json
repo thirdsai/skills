@@ -2,13 +2,32 @@
   "name": "thirds-ai",
   "version": "1.0.0",
   "description": "Make branded PDFs and images from reusable templates, brand kits, and your data.",
-  "author": { "name": "thirds.ai", "url": "https://thirds.ai" },
+  "author": {
+    "name": "thirds.ai",
+    "url": "https://thirds.ai"
+  },
   "homepage": "https://thirds.ai/docs/mcp/claude-code",
   "repository": "https://github.com/thirdsai/skills",
   "license": "MIT",
-  "keywords": ["pdf", "image", "templates", "brand kit", "invoice", "social images", "mcp"],
+  "icon": "./assets/logo.png",
+  "documentationUrl": "https://thirds.ai/docs/mcp/claude-code",
+  "supportUrl": "https://thirds.ai/support",
+  "privacyPolicyUrl": "https://thirds.ai/privacy",
+  "termsOfServiceUrl": "https://thirds.ai/terms",
+  "keywords": [
+    "pdf",
+    "image",
+    "templates",
+    "brand kit",
+    "invoice",
+    "social images",
+    "mcp"
+  ],
   "skills": "./skills/",
   "mcpServers": {
-    "thirds": { "type": "http", "url": "https://thirds.ai/mcp" }
+    "thirds": {
+      "type": "http",
+      "url": "https://thirds.ai/mcp"
+    }
   }
 }

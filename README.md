@@ -39,6 +39,10 @@ Each skill works when installed alone. Pick the task you need:
 
 Connect your agent to `https://thirds.ai/mcp` with a private thirds.ai API key before using MCP. Follow the [setup guide](https://thirds.ai/docs/mcp) for your client. Keep the key in its secret store. A skill install does not create an authenticated connection.
 
+## Your data
+
+The skills run in your agent. They send nothing on their own. When your agent uses the thirds.ai MCP server or API, it sends what the task needs to thirds.ai: your template HTML, the data you fill in, brand kit colours, logos, and fonts, and any images you upload. thirds.ai uses them to make your files and keeps them in your account. The [privacy policy](https://thirds.ai/privacy) explains what we keep, for how long, and how to delete it.
+
 The [Python](examples/render_saved_template.py) and [Node](examples/render_saved_template.mjs) examples show one REST request for a saved PDF. Set `THIRDS_API_KEY` in your private environment. Replace the sample template ID, data, and idempotency key.
 
 ```sh
